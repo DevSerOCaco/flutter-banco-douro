@@ -8,32 +8,35 @@ class AccountWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 128,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColor.lightOrange,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row( 
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("${account.name} ${account.lastName}"
-                , style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),),
-            Text("ID: ${account.id}"),
-            Text("Saldo: R\$${account.balance.toStringAsFixed(2)}"),
-            Text("Tipo: ${account.accountType}"),
-          ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: 128,
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: AppColor.lightOrange,
+          borderRadius: BorderRadius.circular(12),
         ),
-        IconButton(onPressed: (){}, icon: Icon(Icons.settings),),
-      ],),
+        child: Row( 
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("${account.name} ${account.lastName}"
+                  , style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),),
+              Text("ID: ${account.id}"),
+              Text("Saldo: R\$${account.balance.toStringAsFixed(2)}"),
+              Text("Tipo: ${account.accountType}"),
+            ],
+          ),
+          IconButton(onPressed: (){}, icon: Icon(Icons.settings),),
+        ],),
+      ),
     );
   }
 }
