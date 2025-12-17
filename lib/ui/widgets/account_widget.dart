@@ -8,11 +8,10 @@ class AccountWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
+    return  Container(
         height: 128,
         padding: const EdgeInsets.all(16),
+        margin: EdgeInsets.only(bottom: 8),
         decoration: BoxDecoration(
           color: AppColor.lightOrange,
           borderRadius: BorderRadius.circular(12),
@@ -31,12 +30,11 @@ class AccountWidget extends StatelessWidget {
                   ),),
               Text("ID: ${account.id}"),
               Text("Saldo: R\$${account.balance.toStringAsFixed(2)}"),
-              Text("Tipo: ${account.accountType}"),
+              Text("Tipo: ${account.accountType ?? "sem tipo definido"}"),
             ],
           ),
           IconButton(onPressed: (){}, icon: Icon(Icons.settings),),
         ],),
-      ),
-    );
+      );
   }
 }
