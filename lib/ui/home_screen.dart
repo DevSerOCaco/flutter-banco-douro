@@ -3,6 +3,7 @@ import 'package:flutter_banco_douro/models/account.dart';
 import 'package:flutter_banco_douro/services/account_service.dart';
 import 'package:flutter_banco_douro/ui/styles/colors.dart';
 import 'package:flutter_banco_douro/ui/widgets/account_widget.dart';
+import 'package:flutter_banco_douro/ui/widgets/add_account_modal.dart';
 
 class HomeScreen extends StatefulWidget {
   
@@ -10,13 +11,15 @@ class HomeScreen extends StatefulWidget {
   
   @override
   State<HomeScreen> createState() => _HomeScreenState();
-  }
+}
 
-class _HomeScreenState extends HomeScreen {
+class _HomeScreenState extends State<HomeScreen> {
 
   Future<List<Account>> _futureGetAll = AccountService().getAll();
   Future<void> refreshGetAll() async {
-    _futureGetAll = AccountService().getAll();
+      setState(() {
+        _futureGetAll = AccountService().getAll();
+      });
   }
 
   @override
@@ -34,11 +37,26 @@ class _HomeScreenState extends HomeScreen {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            isScrollControlled: true,
+            context: context, 
+            builder: (context) {
+            return const AddAccountModal();
+          },
+          );
+        },
+        backgroundColor: AppColor.orange,
+        child: const Icon(Icons.add),
+      ),
       body: Padding(
-        padding: const EdgeInsets.all(0),
+        padding: const EdgeInsets.all(16.0),
         child: RefreshIndicator(
           onRefresh: refreshGetAll,
-          child: FutureBuilder(future: _futureGetAll, builder: (context, snapshot) {
+          child: FutureBuilder(
+            future: _futureGetAll, 
+            builder: (context, snapshot) {
             switch(snapshot.connectionState) {
               case ConnectionState.none:
                 return Center(child: CircularProgressIndicator());
